@@ -12,14 +12,14 @@ namespace WebSiteHotel.Core.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietHoaDon
+    public partial class BillDetail
     {
         public int MaHD { get; set; }
         public string MaPhong { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<decimal> DonGia { get; set; }
     
-        public virtual HoaDon HoaDon { get; set; }
-        public virtual Phong Phong { get; set; }
+        public virtual Bill Bill { get; set; }
+        public virtual Room Room { get; set; }
     }
 }

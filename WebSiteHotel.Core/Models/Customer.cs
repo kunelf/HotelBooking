@@ -12,12 +12,12 @@ namespace WebSiteHotel.Core.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class KhachHang
+    public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KhachHang()
+        public Customer()
         {
-            this.HoaDons = new HashSet<HoaDon>();
+            this.Bills = new HashSet<Bill>();
         }
     
         public int MaKH { get; set; }
@@ -29,6 +29,6 @@ namespace WebSiteHotel.Core.Models
         public string SDT { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoaDon> HoaDons { get; set; }
+        public virtual ICollection<Bill> Bills { get; set; }
     }
 }

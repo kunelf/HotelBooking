@@ -1,17 +1,20 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using WebSiteHotel.Core.Models;
+﻿using System.Web.Mvc;
+using WebSiteHotel.Core.Services;
 
 namespace WebSiteHotel.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
-        QuanLyKhachSanEntities db = new QuanLyKhachSanEntities();
+        private readonly RoomService _roomService;
+        public HomeController()
+        {
+            _roomService = new RoomService();
+        }
+
         public ActionResult Index()
         {
             //ViewBag.TenLoai = db.LoaiPhongs.Single(n => n.MaLoai == Phong.MaPhong).TenLoai;
-            return View(db.Phongs.Take(7).ToList());
+            return View(_roomService.GetRooms());
         }
     }
 }

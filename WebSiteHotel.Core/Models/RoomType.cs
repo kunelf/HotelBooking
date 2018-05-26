@@ -12,27 +12,18 @@ namespace WebSiteHotel.Core.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Phong
+    public partial class RoomType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Phong()
+        public RoomType()
         {
-            this.ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
+            this.Rooms = new HashSet<Room>();
         }
     
-        public string MaPhong { get; set; }
-        public Nullable<int> MaLoai { get; set; }
-        public Nullable<decimal> GiaPhong { get; set; }
-        public Nullable<int> TinhTrang { get; set; }
-        public string MaNV { get; set; }
-        public Nullable<int> MaDV { get; set; }
-        public string MoTa { get; set; }
-        public string AnhBia { get; set; }
+        public int MaLoai { get; set; }
+        public string TenLoai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
-        public virtual DichVu DichVu { get; set; }
-        public virtual LoaiPhong LoaiPhong { get; set; }
-        public virtual NhanVien NhanVien { get; set; }
+        public virtual ICollection<Room> Rooms { get; set; }
     }
 }

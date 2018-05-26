@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QuanLyKhachSanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HotelsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="UserAdmin" />
@@ -13,7 +13,7 @@
           <Property Name="PassAdmin" Type="varchar" MaxLength="30" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="ChiTietHoaDon">
+        <EntityType Name="BillDetails">
           <Key>
             <PropertyRef Name="MaHD" />
             <PropertyRef Name="MaPhong" />
@@ -23,15 +23,7 @@
           <Property Name="SoLuong" Type="int" />
           <Property Name="DonGia" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
-        <EntityType Name="DichVu">
-          <Key>
-            <PropertyRef Name="MaDV" />
-          </Key>
-          <Property Name="MaDV" Type="int" Nullable="false" />
-          <Property Name="TenDV" Type="nvarchar" MaxLength="50" />
-          <Property Name="GiaDV" Type="decimal" Precision="18" Scale="0" />
-        </EntityType>
-        <EntityType Name="HoaDon">
+        <EntityType Name="Bills">
           <Key>
             <PropertyRef Name="MaHD" />
           </Key>
@@ -40,7 +32,7 @@
           <Property Name="NgayGiao" Type="datetime" />
           <Property Name="MaKH" Type="int" />
         </EntityType>
-        <EntityType Name="KhachHang">
+        <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="MaKH" />
           </Key>
@@ -52,14 +44,7 @@
           <Property Name="NgaySinh" Type="datetime" />
           <Property Name="SDT" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="LoaiPhong">
-          <Key>
-            <PropertyRef Name="MaLoai" />
-          </Key>
-          <Property Name="MaLoai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenLoai" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="NhanVien">
+        <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="MaNV" />
           </Key>
@@ -72,7 +57,7 @@
           <Property Name="DienThoai" Type="varchar" MaxLength="50" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="Phong">
+        <EntityType Name="Rooms">
           <Key>
             <PropertyRef Name="MaPhong" />
           </Key>
@@ -85,6 +70,21 @@
           <Property Name="MoTa" Type="nvarchar" MaxLength="100" />
           <Property Name="AnhBia" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="RoomTypes">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoai" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="MaDV" />
+          </Key>
+          <Property Name="MaDV" Type="int" Nullable="false" />
+          <Property Name="TenDV" Type="nvarchar" MaxLength="50" />
+          <Property Name="GiaDV" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -96,117 +96,117 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_ChiTietHoaDon_HoaDon">
-          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
-          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <End Role="Bills" Type="Self.Bills" Multiplicity="1" />
+          <End Role="BillDetails" Type="Self.BillDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="HoaDon">
+            <Principal Role="Bills">
               <PropertyRef Name="MaHD" />
             </Principal>
-            <Dependent Role="ChiTietHoaDon">
+            <Dependent Role="BillDetails">
               <PropertyRef Name="MaHD" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietHoaDon_Phong">
-          <End Role="Phong" Type="Self.Phong" Multiplicity="1" />
-          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="BillDetails" Type="Self.BillDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Phong">
+            <Principal Role="Rooms">
               <PropertyRef Name="MaPhong" />
             </Principal>
-            <Dependent Role="ChiTietHoaDon">
+            <Dependent Role="BillDetails">
               <PropertyRef Name="MaPhong" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HoaDon_KhachHang">
-          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
-          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Bills" Type="Self.Bills" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="KhachHang">
+            <Principal Role="Customers">
               <PropertyRef Name="MaKH" />
             </Principal>
-            <Dependent Role="HoaDon">
+            <Dependent Role="Bills">
               <PropertyRef Name="MaKH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Phong_DichVu">
-          <End Role="DichVu" Type="Self.DichVu" Multiplicity="0..1" />
-          <End Role="Phong" Type="Self.Phong" Multiplicity="*" />
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DichVu">
+            <Principal Role="Services">
               <PropertyRef Name="MaDV" />
             </Principal>
-            <Dependent Role="Phong">
+            <Dependent Role="Rooms">
               <PropertyRef Name="MaDV" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Phong_LoaiPhong">
-          <End Role="LoaiPhong" Type="Self.LoaiPhong" Multiplicity="0..1" />
-          <End Role="Phong" Type="Self.Phong" Multiplicity="*" />
+          <End Role="RoomTypes" Type="Self.RoomTypes" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LoaiPhong">
+            <Principal Role="RoomTypes">
               <PropertyRef Name="MaLoai" />
             </Principal>
-            <Dependent Role="Phong">
+            <Dependent Role="Rooms">
               <PropertyRef Name="MaLoai" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Phong_NhanVien">
-          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
-          <End Role="Phong" Type="Self.Phong" Multiplicity="*" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="NhanVien">
+            <Principal Role="Employees">
               <PropertyRef Name="MaNV" />
             </Principal>
-            <Dependent Role="Phong">
+            <Dependent Role="Rooms">
               <PropertyRef Name="MaNV" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QuanLyKhachSanModelStoreContainer">
+        <EntityContainer Name="HotelsModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DichVu" EntityType="Self.DichVu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LoaiPhong" EntityType="Self.LoaiPhong" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Phong" EntityType="Self.Phong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillDetails" EntityType="Self.BillDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomTypes" EntityType="Self.RoomTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ChiTietHoaDon_HoaDon" Association="Self.FK_ChiTietHoaDon_HoaDon">
-            <End Role="HoaDon" EntitySet="HoaDon" />
-            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
+            <End Role="Bills" EntitySet="Bills" />
+            <End Role="BillDetails" EntitySet="BillDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_ChiTietHoaDon_Phong" Association="Self.FK_ChiTietHoaDon_Phong">
-            <End Role="Phong" EntitySet="Phong" />
-            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="BillDetails" EntitySet="BillDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_HoaDon_KhachHang" Association="Self.FK_HoaDon_KhachHang">
-            <End Role="KhachHang" EntitySet="KhachHang" />
-            <End Role="HoaDon" EntitySet="HoaDon" />
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Bills" EntitySet="Bills" />
           </AssociationSet>
           <AssociationSet Name="FK_Phong_DichVu" Association="Self.FK_Phong_DichVu">
-            <End Role="DichVu" EntitySet="DichVu" />
-            <End Role="Phong" EntitySet="Phong" />
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
           <AssociationSet Name="FK_Phong_LoaiPhong" Association="Self.FK_Phong_LoaiPhong">
-            <End Role="LoaiPhong" EntitySet="LoaiPhong" />
-            <End Role="Phong" EntitySet="Phong" />
+            <End Role="RoomTypes" EntitySet="RoomTypes" />
+            <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
           <AssociationSet Name="FK_Phong_NhanVien" Association="Self.FK_Phong_NhanVien">
-            <End Role="NhanVien" EntitySet="NhanVien" />
-            <End Role="Phong" EntitySet="Phong" />
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="QuanLyKhachSanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="HotelsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="UserAdmin" />
@@ -215,7 +215,7 @@
           <Property Name="PassAdmin" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="ChiTietHoaDon">
+        <EntityType Name="BillDetail">
           <Key>
             <PropertyRef Name="MaHD" />
             <PropertyRef Name="MaPhong" />
@@ -224,19 +224,10 @@
           <Property Name="MaPhong" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="DonGia" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="HoaDon" Relationship="Self.FK_ChiTietHoaDon_HoaDon" FromRole="ChiTietHoaDon" ToRole="HoaDon" />
-          <NavigationProperty Name="Phong" Relationship="Self.FK_ChiTietHoaDon_Phong" FromRole="ChiTietHoaDon" ToRole="Phong" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_ChiTietHoaDon_HoaDon" FromRole="BillDetails" ToRole="Bills" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_ChiTietHoaDon_Phong" FromRole="BillDetails" ToRole="Rooms" />
         </EntityType>
-        <EntityType Name="DichVu">
-          <Key>
-            <PropertyRef Name="MaDV" />
-          </Key>
-          <Property Name="MaDV" Type="Int32" Nullable="false" />
-          <Property Name="TenDV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GiaDV" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Phongs" Relationship="Self.FK_Phong_DichVu" FromRole="DichVu" ToRole="Phong" />
-        </EntityType>
-        <EntityType Name="HoaDon">
+        <EntityType Name="Bill">
           <Key>
             <PropertyRef Name="MaHD" />
           </Key>
@@ -244,10 +235,10 @@
           <Property Name="NgayDat" Type="DateTime" Precision="3" />
           <Property Name="NgayGiao" Type="DateTime" Precision="3" />
           <Property Name="MaKH" Type="Int32" />
-          <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK_ChiTietHoaDon_HoaDon" FromRole="HoaDon" ToRole="ChiTietHoaDon" />
-          <NavigationProperty Name="KhachHang" Relationship="Self.FK_HoaDon_KhachHang" FromRole="HoaDon" ToRole="KhachHang" />
+          <NavigationProperty Name="BillDetails" Relationship="Self.FK_ChiTietHoaDon_HoaDon" FromRole="Bills" ToRole="BillDetails" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_HoaDon_KhachHang" FromRole="Bills" ToRole="Customers" />
         </EntityType>
-        <EntityType Name="KhachHang">
+        <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="MaKH" />
           </Key>
@@ -258,17 +249,9 @@
           <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="NgaySinh" Type="DateTime" Precision="3" />
           <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="HoaDons" Relationship="Self.FK_HoaDon_KhachHang" FromRole="KhachHang" ToRole="HoaDon" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_HoaDon_KhachHang" FromRole="Customers" ToRole="Bills" />
         </EntityType>
-        <EntityType Name="LoaiPhong">
-          <Key>
-            <PropertyRef Name="MaLoai" />
-          </Key>
-          <Property Name="MaLoai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Phongs" Relationship="Self.FK_Phong_LoaiPhong" FromRole="LoaiPhong" ToRole="Phong" />
-        </EntityType>
-        <EntityType Name="NhanVien">
+        <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="MaNV" />
           </Key>
@@ -280,9 +263,9 @@
           <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Phongs" Relationship="Self.FK_Phong_NhanVien" FromRole="NhanVien" ToRole="Phong" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Phong_NhanVien" FromRole="Employees" ToRole="Rooms" />
         </EntityType>
-        <EntityType Name="Phong">
+        <EntityType Name="Room">
           <Key>
             <PropertyRef Name="MaPhong" />
           </Key>
@@ -294,10 +277,27 @@
           <Property Name="MaDV" Type="Int32" />
           <Property Name="MoTa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AnhBia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK_ChiTietHoaDon_Phong" FromRole="Phong" ToRole="ChiTietHoaDon" />
-          <NavigationProperty Name="DichVu" Relationship="Self.FK_Phong_DichVu" FromRole="Phong" ToRole="DichVu" />
-          <NavigationProperty Name="LoaiPhong" Relationship="Self.FK_Phong_LoaiPhong" FromRole="Phong" ToRole="LoaiPhong" />
-          <NavigationProperty Name="NhanVien" Relationship="Self.FK_Phong_NhanVien" FromRole="Phong" ToRole="NhanVien" />
+          <NavigationProperty Name="BillDetails" Relationship="Self.FK_ChiTietHoaDon_Phong" FromRole="Rooms" ToRole="BillDetails" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Phong_NhanVien" FromRole="Rooms" ToRole="Employees" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Phong_DichVu" FromRole="Rooms" ToRole="Services" />
+          <NavigationProperty Name="RoomType" Relationship="Self.FK_Phong_LoaiPhong" FromRole="Rooms" ToRole="RoomTypes" />
+        </EntityType>
+        <EntityType Name="RoomType">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Phong_LoaiPhong" FromRole="RoomTypes" ToRole="Rooms" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="MaDV" />
+          </Key>
+          <Property Name="MaDV" Type="Int32" Nullable="false" />
+          <Property Name="TenDV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GiaDV" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Phong_DichVu" FromRole="Services" ToRole="Rooms" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -310,110 +310,110 @@
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_ChiTietHoaDon_HoaDon">
-          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
-          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <End Role="Bills" Type="Self.Bill" Multiplicity="1" />
+          <End Role="BillDetails" Type="Self.BillDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="HoaDon">
+            <Principal Role="Bills">
               <PropertyRef Name="MaHD" />
             </Principal>
-            <Dependent Role="ChiTietHoaDon">
+            <Dependent Role="BillDetails">
               <PropertyRef Name="MaHD" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ChiTietHoaDon_Phong">
-          <End Role="Phong" Type="Self.Phong" Multiplicity="1" />
-          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <End Role="Rooms" Type="Self.Room" Multiplicity="1" />
+          <End Role="BillDetails" Type="Self.BillDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Phong">
+            <Principal Role="Rooms">
               <PropertyRef Name="MaPhong" />
             </Principal>
-            <Dependent Role="ChiTietHoaDon">
+            <Dependent Role="BillDetails">
               <PropertyRef Name="MaPhong" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Phong_DichVu">
-          <End Role="DichVu" Type="Self.DichVu" Multiplicity="0..1" />
-          <End Role="Phong" Type="Self.Phong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DichVu">
-              <PropertyRef Name="MaDV" />
-            </Principal>
-            <Dependent Role="Phong">
-              <PropertyRef Name="MaDV" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HoaDon_KhachHang">
-          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
-          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bills" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="KhachHang">
+            <Principal Role="Customers">
               <PropertyRef Name="MaKH" />
             </Principal>
-            <Dependent Role="HoaDon">
+            <Dependent Role="Bills">
               <PropertyRef Name="MaKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Phong_LoaiPhong">
-          <End Role="LoaiPhong" Type="Self.LoaiPhong" Multiplicity="0..1" />
-          <End Role="Phong" Type="Self.Phong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoaiPhong">
-              <PropertyRef Name="MaLoai" />
-            </Principal>
-            <Dependent Role="Phong">
-              <PropertyRef Name="MaLoai" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Phong_NhanVien">
-          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
-          <End Role="Phong" Type="Self.Phong" Multiplicity="*" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="NhanVien">
+            <Principal Role="Employees">
               <PropertyRef Name="MaNV" />
             </Principal>
-            <Dependent Role="Phong">
+            <Dependent Role="Rooms">
               <PropertyRef Name="MaNV" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QuanLyKhachSanEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Phong_DichVu">
+          <End Role="Services" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="MaDV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Phong_LoaiPhong">
+          <End Role="RoomTypes" Type="Self.RoomType" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomTypes">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
-          <EntitySet Name="ChiTietHoaDons" EntityType="Self.ChiTietHoaDon" />
-          <EntitySet Name="DichVus" EntityType="Self.DichVu" />
-          <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
-          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
-          <EntitySet Name="LoaiPhongs" EntityType="Self.LoaiPhong" />
-          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
-          <EntitySet Name="Phongs" EntityType="Self.Phong" />
+          <EntitySet Name="BillDetails" EntityType="Self.BillDetail" />
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="RoomTypes" EntityType="Self.RoomType" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_ChiTietHoaDon_HoaDon" Association="Self.FK_ChiTietHoaDon_HoaDon">
-            <End Role="HoaDon" EntitySet="HoaDons" />
-            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDons" />
+            <End Role="Bills" EntitySet="Bills" />
+            <End Role="BillDetails" EntitySet="BillDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_ChiTietHoaDon_Phong" Association="Self.FK_ChiTietHoaDon_Phong">
-            <End Role="Phong" EntitySet="Phongs" />
-            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Phong_DichVu" Association="Self.FK_Phong_DichVu">
-            <End Role="DichVu" EntitySet="DichVus" />
-            <End Role="Phong" EntitySet="Phongs" />
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="BillDetails" EntitySet="BillDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_HoaDon_KhachHang" Association="Self.FK_HoaDon_KhachHang">
-            <End Role="KhachHang" EntitySet="KhachHangs" />
-            <End Role="HoaDon" EntitySet="HoaDons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Phong_LoaiPhong" Association="Self.FK_Phong_LoaiPhong">
-            <End Role="LoaiPhong" EntitySet="LoaiPhongs" />
-            <End Role="Phong" EntitySet="Phongs" />
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Bills" EntitySet="Bills" />
           </AssociationSet>
           <AssociationSet Name="FK_Phong_NhanVien" Association="Self.FK_Phong_NhanVien">
-            <End Role="NhanVien" EntitySet="NhanViens" />
-            <End Role="Phong" EntitySet="Phongs" />
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phong_DichVu" Association="Self.FK_Phong_DichVu">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phong_LoaiPhong" Association="Self.FK_Phong_LoaiPhong">
+            <End Role="RoomTypes" EntitySet="RoomTypes" />
+            <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -421,9 +421,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QuanLyKhachSanModelStoreContainer" CdmEntityContainer="QuanLyKhachSanEntities">
+        <EntityContainerMapping StorageEntityContainer="HotelsModelStoreContainer" CdmEntityContainer="HotelEntities">
           <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Admin">
+            <EntityTypeMapping TypeName="HotelsModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
                 <ScalarProperty Name="UserAdmin" ColumnName="UserAdmin" />
                 <ScalarProperty Name="PassAdmin" ColumnName="PassAdmin" />
@@ -431,9 +431,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ChiTietHoaDons">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.ChiTietHoaDon">
-              <MappingFragment StoreEntitySet="ChiTietHoaDon">
+          <EntitySetMapping Name="BillDetails">
+            <EntityTypeMapping TypeName="HotelsModel.BillDetail">
+              <MappingFragment StoreEntitySet="BillDetails">
                 <ScalarProperty Name="MaHD" ColumnName="MaHD" />
                 <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
@@ -441,18 +441,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DichVus">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.DichVu">
-              <MappingFragment StoreEntitySet="DichVu">
-                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
-                <ScalarProperty Name="TenDV" ColumnName="TenDV" />
-                <ScalarProperty Name="GiaDV" ColumnName="GiaDV" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HoaDons">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.HoaDon">
-              <MappingFragment StoreEntitySet="HoaDon">
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="HotelsModel.Bill">
+              <MappingFragment StoreEntitySet="Bills">
                 <ScalarProperty Name="MaHD" ColumnName="MaHD" />
                 <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
                 <ScalarProperty Name="NgayGiao" ColumnName="NgayGiao" />
@@ -460,9 +451,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KhachHangs">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.KhachHang">
-              <MappingFragment StoreEntitySet="KhachHang">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="HotelsModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="CMND_Passport" ColumnName="CMND_Passport" />
@@ -473,17 +464,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoaiPhongs">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.LoaiPhong">
-              <MappingFragment StoreEntitySet="LoaiPhong">
-                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
-                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NhanViens">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.NhanVien">
-              <MappingFragment StoreEntitySet="NhanVien">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="HotelsModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="MaNV" ColumnName="MaNV" />
                 <ScalarProperty Name="TenNV" ColumnName="TenNV" />
                 <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
@@ -495,9 +478,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Phongs">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.Phong">
-              <MappingFragment StoreEntitySet="Phong">
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="HotelsModel.Room">
+              <MappingFragment StoreEntitySet="Rooms">
                 <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
                 <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
                 <ScalarProperty Name="GiaPhong" ColumnName="GiaPhong" />
@@ -509,8 +492,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RoomTypes">
+            <EntityTypeMapping TypeName="HotelsModel.RoomType">
+              <MappingFragment StoreEntitySet="RoomTypes">
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="HotelsModel.Service">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
+                <ScalarProperty Name="TenDV" ColumnName="TenDV" />
+                <ScalarProperty Name="GiaDV" ColumnName="GiaDV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="QuanLyKhachSanModel.sysdiagram">
+            <EntityTypeMapping TypeName="HotelsModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />

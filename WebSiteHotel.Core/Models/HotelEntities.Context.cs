@@ -13,10 +13,10 @@ namespace WebSiteHotel.Core.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QuanLyKhachSanEntities : DbContext
+    public partial class HotelEntities : DbContext
     {
-        public QuanLyKhachSanEntities()
-            : base("name=QuanLyKhachSanEntities")
+        public HotelEntities()
+            : base("name=HotelEntities")
         {
         }
     
@@ -26,13 +26,13 @@ namespace WebSiteHotel.Core.Models
         }
     
         public virtual DbSet<Admin> Admins { get; set; }
-        public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
-        public virtual DbSet<DichVu> DichVus { get; set; }
-        public virtual DbSet<HoaDon> HoaDons { get; set; }
-        public virtual DbSet<KhachHang> KhachHangs { get; set; }
-        public virtual DbSet<LoaiPhong> LoaiPhongs { get; set; }
-        public virtual DbSet<NhanVien> NhanViens { get; set; }
-        public virtual DbSet<Phong> Phongs { get; set; }
+        public virtual DbSet<BillDetail> BillDetails { get; set; }
+        public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<RoomType> RoomTypes { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

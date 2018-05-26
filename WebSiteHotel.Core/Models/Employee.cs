@@ -12,21 +12,24 @@ namespace WebSiteHotel.Core.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HoaDon
+    public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HoaDon()
+        public Employee()
         {
-            this.ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
+            this.Rooms = new HashSet<Room>();
         }
     
-        public int MaHD { get; set; }
-        public Nullable<System.DateTime> NgayDat { get; set; }
-        public Nullable<System.DateTime> NgayGiao { get; set; }
-        public Nullable<int> MaKH { get; set; }
+        public string MaNV { get; set; }
+        public string TenNV { get; set; }
+        public string ChucVu { get; set; }
+        public Nullable<decimal> LuongNV { get; set; }
+        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public string GioiTinh { get; set; }
+        public string DienThoai { get; set; }
+        public string DiaChi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
-        public virtual KhachHang KhachHang { get; set; }
+        public virtual ICollection<Room> Rooms { get; set; }
     }
 }

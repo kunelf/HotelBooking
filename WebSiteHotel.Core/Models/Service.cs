@@ -12,12 +12,12 @@ namespace WebSiteHotel.Core.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DichVu
+    public partial class Service
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DichVu()
+        public Service()
         {
-            this.Phongs = new HashSet<Phong>();
+            this.Rooms = new HashSet<Room>();
         }
     
         public int MaDV { get; set; }
@@ -25,6 +25,6 @@ namespace WebSiteHotel.Core.Models
         public Nullable<decimal> GiaDV { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Phong> Phongs { get; set; }
+        public virtual ICollection<Room> Rooms { get; set; }
     }
 }

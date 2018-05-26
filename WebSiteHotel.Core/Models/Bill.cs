@@ -12,24 +12,21 @@ namespace WebSiteHotel.Core.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NhanVien
+    public partial class Bill
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NhanVien()
+        public Bill()
         {
-            this.Phongs = new HashSet<Phong>();
+            this.BillDetails = new HashSet<BillDetail>();
         }
     
-        public string MaNV { get; set; }
-        public string TenNV { get; set; }
-        public string ChucVu { get; set; }
-        public Nullable<decimal> LuongNV { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string GioiTinh { get; set; }
-        public string DienThoai { get; set; }
-        public string DiaChi { get; set; }
+        public int MaHD { get; set; }
+        public Nullable<System.DateTime> NgayDat { get; set; }
+        public Nullable<System.DateTime> NgayGiao { get; set; }
+        public Nullable<int> MaKH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Phong> Phongs { get; set; }
+        public virtual ICollection<BillDetail> BillDetails { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }
