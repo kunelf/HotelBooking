@@ -7,28 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSiteHotel.Models
+namespace WebSiteHotel.Core.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class KhachHang
+    public partial class LoaiPhong
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KhachHang()
+        public LoaiPhong()
         {
-            this.HoaDons = new HashSet<HoaDon>();
+            this.Phongs = new HashSet<Phong>();
         }
     
-        public int MaKH { get; set; }
-        public string HoTen { get; set; }
-        public string CMND_Passport { get; set; }
-        public string QuocTich { get; set; }
-        public string GioiTinh { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string SDT { get; set; }
+        public int MaLoai { get; set; }
+        public string TenLoai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoaDon> HoaDons { get; set; }
+        public virtual ICollection<Phong> Phongs { get; set; }
     }
 }

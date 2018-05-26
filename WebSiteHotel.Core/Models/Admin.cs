@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSiteHotel.Models
+namespace WebSiteHotel.Core.Models
 {
     using System;
     using System.Collections.Generic;

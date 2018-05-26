@@ -7,24 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSiteHotel.Models
+namespace WebSiteHotel.Core.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DichVu
+    public partial class Phong
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DichVu()
+        public Phong()
         {
-            this.Phongs = new HashSet<Phong>();
+            this.ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
         }
     
-        public int MaDV { get; set; }
-        public string TenDV { get; set; }
-        public Nullable<decimal> GiaDV { get; set; }
+        public string MaPhong { get; set; }
+        public Nullable<int> MaLoai { get; set; }
+        public Nullable<decimal> GiaPhong { get; set; }
+        public Nullable<int> TinhTrang { get; set; }
+        public string MaNV { get; set; }
+        public Nullable<int> MaDV { get; set; }
+        public string MoTa { get; set; }
+        public string AnhBia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Phong> Phongs { get; set; }
+        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+        public virtual DichVu DichVu { get; set; }
+        public virtual LoaiPhong LoaiPhong { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

@@ -7,32 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSiteHotel.Models
+namespace WebSiteHotel.Core.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Phong
+    public partial class KhachHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Phong()
+        public KhachHang()
         {
-            this.ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
+            this.HoaDons = new HashSet<HoaDon>();
         }
     
-        public string MaPhong { get; set; }
-        public Nullable<int> MaLoai { get; set; }
-        public Nullable<decimal> GiaPhong { get; set; }
-        public Nullable<int> TinhTrang { get; set; }
-        public string MaNV { get; set; }
-        public Nullable<int> MaDV { get; set; }
-        public string MoTa { get; set; }
-        public string AnhBia { get; set; }
+        public int MaKH { get; set; }
+        public string HoTen { get; set; }
+        public string CMND_Passport { get; set; }
+        public string QuocTich { get; set; }
+        public string GioiTinh { get; set; }
+        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public string SDT { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
-        public virtual DichVu DichVu { get; set; }
-        public virtual LoaiPhong LoaiPhong { get; set; }
-        public virtual NhanVien NhanVien { get; set; }
+        public virtual ICollection<HoaDon> HoaDons { get; set; }
     }
 }
