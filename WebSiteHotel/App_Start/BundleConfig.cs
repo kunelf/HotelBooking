@@ -9,28 +9,28 @@ namespace WebSiteHotel
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/content/layout").Include(
-                        "~/Content/CssNguoiDungLayout/css/animate.css",
-                        "~/Content/CssNguoiDungLayout/css/icomoon.css",
-                        "~/Content/CssNguoiDungLayout/css/bootstrap.css",
-                        "~/Content/CssNguoiDungLayout/css/magnific-popup.css",
-                        "~/Content/CssNguoiDungLayout/css/flexslider.css",
-                        "~/Content/CssNguoiDungLayout/css/owl.carousel.min.css",
-                        "~/Content/CssNguoiDungLayout/css/owl.theme.default.min.css",
-                        "~/Content/CssNguoiDungLayout/css/bootstrap-datepicker.css",
-                        "~/Content/CssNguoiDungLayout/fonts/flaticon/font/flaticon.css",
-                        "~/Content/CssNguoiDungLayout/css/style.css"));
+                                 "~/Content/css/animate.css",
+                                 "~/Content/css/bootstrap.css",
+                                 "~/Content/css/magnific-popup.css",
+                                 "~/Content/css/flexslider.css",
+                                 "~/Content/css/owl.carousel.min.css",
+                                 "~/Content/css/owl.theme.default.min.css",
+                                 "~/Content/css/bootstrap-datepicker.css",
+                                 "~/Content/css/style.css")
+                                 .Include("~/Content/css/icomoon.css", new CssRewriteUrlTransform())
+                                 .Include("~/Content/fonts/flaticon/font/flaticon.css", new CssRewriteUrlTransform()));
 
             bundles.Add(new ScriptBundle("~/scripts/layout").Include(
-                      "~/Content/CssNguoiDungLayout/js/jquery.min.js",
-                      "~/Content/CssNguoiDungLayout/js/jquery.easing.1.3.js",
-                      "~/Content/CssNguoiDungLayout/js/bootstrap.min.js",
-                      "~/Content/CssNguoiDungLayout/js/jquery.waypoints.min.js",
-                      "~/Content/CssNguoiDungLayout/js/jquery.flexslider-min.js",
-                      "~/Content/CssNguoiDungLayout/js/owl.carousel.min.js",
-                      "~/Content/CssNguoiDungLayout/js/jquery.magnific-popup.min.js",
-                      "~/Content/CssNguoiDungLayout/js/magnific-popup-options.js",
-                      "~/Content/CssNguoiDungLayout/js/bootstrap-datepicker.js",
-                      "~/Content/CssNguoiDungLayout/js/main.js"));
+                                 "~/Scripts/jquery.min.js",
+                                 "~/Scripts/jquery.easing.1.3.js",
+                                 "~/Scripts/bootstrap.min.js",
+                                 "~/Scripts/jquery.waypoints.min.js",
+                                 "~/Scripts/jquery.flexslider-min.js",
+                                 "~/Scripts/owl.carousel.min.js",
+                                 "~/Scripts/jquery.magnific-popup.min.js",
+                                 "~/Scripts/magnific-popup-options.js",
+                                 "~/Scripts/bootstrap-datepicker.js",
+                                 "~/Scripts/main.js"));
 
             BundleTable.EnableOptimizations = true;
         }
