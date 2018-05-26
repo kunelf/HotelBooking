@@ -20,11 +20,6 @@ namespace WebSiteHotel
                         "~/Content/CssNguoiDungLayout/fonts/flaticon/font/flaticon.css",
                         "~/Content/CssNguoiDungLayout/css/style.css"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
             bundles.Add(new ScriptBundle("~/scripts/layout").Include(
                       "~/Content/CssNguoiDungLayout/js/jquery.min.js",
                       "~/Content/CssNguoiDungLayout/js/jquery.easing.1.3.js",
