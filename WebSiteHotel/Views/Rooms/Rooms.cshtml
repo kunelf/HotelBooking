@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<WebSiteHotel.Models.Phong>
+@{
+    ViewBag.Title = "Rooms";
+    Layout = "~/Views/Layout/RoomLayout.cshtml";
+}
+@section TieuDe{
+    @*<h2>Choose our Best</h2>*@
+    <h1>Rooms &amp; Suites</h1>
+    }
+@if (Model.Count == 0)
+{
+    <h1>@ViewBag.Phong</h1>
+}
+@{int i = 0;}
+@foreach (var item in Model)
+{
+    <div class="col-md-4 room-wrap animate-box">
+        <a href="@Url.Content("~/images/"+item.AnhBia)" class="room image-popup-link" style="background-image: url(@Url.Content("/images/"+item.AnhBia));"></a>
+        <div class="desc text-center">
+            <span class="rate-star"><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span>
+            <h3><a href="rooms-suites.html">@item.MaLoai</a></h3>
+            <p class="price">
+
+                <span class="price-room">@String.Format("{0:0,0}", item.GiaPhong)</span>
+                <span class="currency">VNĐ</span>
+                <span class="per">/ mỗi đêm</span>
+            </p>
+            <ul>
+                @if (item.MoTa.Length < 40)
+                {
+                    <li><i class="icon-check"></i> @item.MoTa</li>
+                }
+                else
+                {
+                    <li><i class="icon-check"></i> @item.MoTa.Substring(0, 40)...</li>
+                }
+                @*<li><i class="icon-check"></i> @item.MoTa</li>*@
+                <li><i class="icon-check"></i> Breakfast included</li>
+                @*<li><i class="icon-check"></i> Price does not include VAT &amp; services fee</li>*@
+            </ul>
+            <p><a class="btn btn-primary btn-book">Book now!</a></p>
+        </div>
+    </div>
+}
+<div style="clear:both"></div>
+
+<div style="text-align:center">
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Rooms", new { page = page }))
+    </div>
+</div>
+
