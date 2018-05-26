@@ -8,7 +8,7 @@ namespace WebSiteHotel
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/layout").Include(
+            bundles.Add(new StyleBundle("~/content/layout").Include(
                         "~/Content/CssNguoiDungLayout/css/animate.css",
                         "~/Content/CssNguoiDungLayout/css/icomoon.css",
                         "~/Content/CssNguoiDungLayout/css/bootstrap.css",
@@ -25,13 +25,19 @@ namespace WebSiteHotel
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/scripts/layout").Include(
+                      "~/Content/CssNguoiDungLayout/js/jquery.min.js",
+                      "~/Content/CssNguoiDungLayout/js/jquery.easing.1.3.js",
+                      "~/Content/CssNguoiDungLayout/js/bootstrap.min.js",
+                      "~/Content/CssNguoiDungLayout/js/jquery.waypoints.min.js",
+                      "~/Content/CssNguoiDungLayout/js/jquery.flexslider-min.js",
+                      "~/Content/CssNguoiDungLayout/js/owl.carousel.min.js",
+                      "~/Content/CssNguoiDungLayout/js/jquery.magnific-popup.min.js",
+                      "~/Content/CssNguoiDungLayout/js/magnific-popup-options.js",
+                      "~/Content/CssNguoiDungLayout/js/bootstrap-datepicker.js",
+                      "~/Content/CssNguoiDungLayout/js/main.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
