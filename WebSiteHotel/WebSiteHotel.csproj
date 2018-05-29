@@ -170,6 +170,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AminitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
@@ -199,6 +200,7 @@
     <Content Include="images\amenities-1.jpg" />
     <Content Include="images\amenities-2.jpg" />
     <Content Include="images\amenities-3.jpg" />
+    <Content Include="images\amenities-4.jpg" />
     <Content Include="images\blog-1.jpg" />
     <Content Include="images\blog-2.jpg" />
     <Content Include="images\blog-3.jpg" />
@@ -287,7 +289,9 @@
     <Content Include="Views\Shared\Partials\_Banners.cshtml" />
     <Content Include="Views\Shared\Partials\_Search.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Shared\Partials\_Footer.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="images\.DS_Store" />
@@ -300,6 +304,16 @@
       <Project>{d7b87ae9-644d-41d5-a173-5d424adbb3d5}</Project>
       <Name>WebSiteHotel.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Partials\_SignUpEmail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Partials\_Services.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\About\About.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
